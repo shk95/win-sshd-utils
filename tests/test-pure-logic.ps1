@@ -58,9 +58,9 @@ Assert-True ($plainIdentity -eq "ssh-ed25519 $blob") 'plain public key identity 
 Assert-True ($optionIdentity -eq $plainIdentity) 'authorized_keys options and comments should not affect identity'
 
 $targetUser = [pscustomobject]@{
-    AccountName = 'TESTPC\sh'
-    SshdUserName = 'sh'
-    ProfilePath = 'C:\Users\sh'
+    AccountName = 'TESTPC\alice'
+    SshdUserName = 'alice'
+    ProfilePath = 'C:\Users\alice'
 }
 $administratorKeyPath = Resolve-AuthorizedKeysPath `
     -TargetUser $targetUser `
@@ -69,7 +69,7 @@ $ordinaryKeyPath = Resolve-AuthorizedKeysPath `
     -TargetUser $targetUser `
     -ConfiguredPath '.ssh/authorized_keys'
 Assert-True ($administratorKeyPath -eq "$env:ProgramData\ssh\administrators_authorized_keys") 'ProgramData token should resolve to the Windows administrator key path'
-Assert-True ($ordinaryKeyPath -eq 'C:\Users\sh\.ssh\authorized_keys') 'relative key path should resolve below the target profile'
+Assert-True ($ordinaryKeyPath -eq 'C:\Users\alice\.ssh\authorized_keys') 'relative key path should resolve below the target profile'
 
 $administratorFileAcl = New-DesiredFileAcl `
     -OwnerSid $script:AdministratorsSid `

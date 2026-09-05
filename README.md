@@ -45,7 +45,7 @@ The same operations can be called noninteractively with `-Action`:
 
 ```powershell
 # Inspect state without checking a particular key.
-pwsh -File ./setup-openssh.ps1 -Action Status -UserName sh
+pwsh -File ./setup-openssh.ps1 -Action Status -UserName alice
 
 # Install the Windows capability only.
 pwsh -File ./setup-openssh.ps1 -Action InstallServer
@@ -53,13 +53,13 @@ pwsh -File ./setup-openssh.ps1 -Action InstallServer
 # Install one key without duplicating an existing copy.
 pwsh -File ./setup-openssh.ps1 `
     -Action InstallPublicKey `
-    -UserName sh `
+    -UserName alice `
     -PublicKeyFile "$HOME/.ssh/id_ed25519.pub"
 
 # Install the key first, then explicitly disable password authentication.
 pwsh -File ./setup-openssh.ps1 `
     -Action ConfigureAuthentication `
-    -UserName sh `
+    -UserName alice `
     -PublicKeyFile "$HOME/.ssh/id_ed25519.pub"
 ```
 
@@ -87,7 +87,7 @@ For a full initial setup:
 ```powershell
 pwsh -File ./setup-openssh.ps1 `
     -Action RecommendedSetup `
-    -UserName sh `
+    -UserName alice `
     -PublicKeyFile "$HOME/.ssh/id_ed25519.pub"
 ```
 
@@ -173,3 +173,7 @@ The repository includes dependency-free tests for key identity parsing, Windows 
 ```powershell
 pwsh -File ./tests/test-pure-logic.ps1
 ```
+
+## License
+
+MIT. See [LICENSE](LICENSE).
